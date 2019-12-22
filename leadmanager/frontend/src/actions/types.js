@@ -5,3 +5,6 @@ export const GET_ERRORS = 'GET_ERRORS';
 export const CREATE_MESSAGE = 'CREATE_MESSAGE';
 export const CLEAR_FORM = 'CLEAR_FORM';
 export const CHANGE_FORM = 'CHANGE_FORM';
+export const USER_LOADING = 'USER_LOADING';
+export const USER_LOADED = 'USER_LOADED';
+export const AUTH_ERROR = 'AUTH_ERROR';
