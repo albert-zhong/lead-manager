@@ -13,7 +13,11 @@ export class Alerts extends Component {
         const { error, alert, message } = this.props;
         if (error !== prevProps.error) {
             for (const [label, errorMessage] of Object.entries(error.msg)) {
-                alert.error(`${label}: ${errorMessage[0]}`);
+                if (Array.isArray(errorMessage)) {
+                    alert.error(`${label}: ${errorMessage[0]}`);
+                } else {
+                    alert.error(`${label}: ${errorMessage}`);
+                }
             }
         }
         if (message !== prevProps.message) {
@@ -22,6 +26,9 @@ export class Alerts extends Component {
             }
             if (message.addLead) {
                 alert.success(message.addLead);
+            }
+            if (message.passwordNotMatch) {
+                alert.error(message.passwordNotMatch);
             }
         }
     }
