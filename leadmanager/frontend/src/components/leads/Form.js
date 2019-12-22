@@ -2,33 +2,37 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addLead } from '../../actions/leads';
+import { changeForm, clearForm } from '../../actions/form';
 
 export class Form extends Component {
-
     static propTypes = {
         addLead: PropTypes.func.isRequired
     }
 
     constructor(props) {
         super(props);
-        this.state = {
-            name: '',
-            email: '',
-            message: '',
-        };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.getForm = this.getForm.bind(this);
+    }
+
+    getForm() {
+        return {
+            name: this.props.name,
+            email: this.props.email,
+            message: this.props.message,
+        };
     }
 
     onChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        const currentForm = this.getForm();
+        currentForm[e.target.name] = e.target.value;
+        this.props.changeForm(currentForm);
     }
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.addLead(this.state);
+        this.props.addLead(this.getForm());
     }
 
     render() {
@@ -43,7 +47,7 @@ export class Form extends Component {
                             type="text"
                             name="name"
                             onChange={this.onChange}
-                            value={this.state.name}
+                            value={this.props.name}
                         />
                     </div>
                     <div className="form-group">
@@ -53,7 +57,7 @@ export class Form extends Component {
                             type="email"
                             name="email"
                             onChange={this.onChange}
-                            value={this.state.email}
+                            value={this.props.email}
                         />
                     </div>
                     <div className="form-group">
@@ -63,7 +67,7 @@ export class Form extends Component {
                             type="text"
                             name="message"
                             onChange={this.onChange}
-                            value={this.state.message}
+                            value={this.props.message}
                         />
                     </div>
                     <div className="form-group">
@@ -77,4 +81,10 @@ export class Form extends Component {
     }
 }
 
-export default connect(null, { addLead })(Form);
+const mapStateToProps = (state) => ({
+    name: state.form.name,
+    email: state.form.email,
+    message: state.form.message,
+});
+
+export default connect(mapStateToProps, { addLead, changeForm, clearForm })(Form);

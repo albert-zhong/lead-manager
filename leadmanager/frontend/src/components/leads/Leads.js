@@ -10,6 +10,10 @@ export class Leads extends Component {
         deleteLead: PropTypes.func.isRequired,
     }
 
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
         this.props.getLeads();
     }
