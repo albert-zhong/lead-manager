@@ -47,7 +47,7 @@ export class Leads extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     leads: state.leads.leads
 })
 

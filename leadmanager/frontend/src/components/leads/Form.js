@@ -43,7 +43,7 @@ export class Form extends Component {
                             type="text"
                             name="name"
                             onChange={this.onChange}
-                            value={this.name}
+                            value={this.state.name}
                         />
                     </div>
                     <div className="form-group">
@@ -53,7 +53,7 @@ export class Form extends Component {
                             type="email"
                             name="email"
                             onChange={this.onChange}
-                            value={this.email}
+                            value={this.state.email}
                         />
                     </div>
                     <div className="form-group">
@@ -63,7 +63,7 @@ export class Form extends Component {
                             type="text"
                             name="message"
                             onChange={this.onChange}
-                            value={this.message}
+                            value={this.state.message}
                         />
                     </div>
                     <div className="form-group">
